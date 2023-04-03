@@ -1,0 +1,68 @@
+---
+output:
+  html_document: default
+  word_document: default
+---
+means per day and means per week and means per month
+look at monthly averages for all variables
+separate in individual yearly graphs if by day or week
+work also on nest data 
+nest by # of eggs
+
+Loading Libraries
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+read_xlsx("../TurgleData/GraphsWithoutLocation.xlsx", 
+    sheet = "Please")
+Graphs <- GRAPHS
+```
+
+Carapace Length
+```{r}
+ggplot(data = Graphs) + 
+  geom_point(aes(x = Date, y = Length)) + 
+  labs(x = "Date",
+    y = "Carapace Length (cm)")
+
+ggplot(data = Graphs) + 
+  geom_line(aes(x = Date, y = Length)) + 
+  labs(x = "Date",
+    y = "Carapace Length (cm)")
+```
+
+```{r}
+ggplot(data = Graphs) + 
+  geom_point(aes(x = Date, y = Width)) + 
+  labs(x = "Date",
+    y = "Carapace Width (cm)")
+
+ggplot(data = Graphs) + 
+  geom_line(aes(x = Date, y = Width)) + 
+  labs(x = "Date",
+    y = "Carapace Width (cm)")
+```
+
+```{r}
+ggplot(data = Graphs) + 
+  geom_point(aes(x = Date, y = NormalEggs)) + 
+  labs(x = "Date",
+    y = "Normal Eggs")
+
+ggplot(data = Graphs) + 
+  geom_line(aes(x = Date, y = NormalEggs)) + 
+  labs(x = "Date",
+    y = "Normal Eggs")
+
+class(Graphs$YolklessEggs)
+```
+
+```{r}
+
+```
+

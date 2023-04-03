@@ -1,0 +1,39 @@
+
+Loading Libraries
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+```
+
+Insurance
+```{r}
+ggplot(data = Cleaner) + geom_boxplot(aes(y = as.numeric(Depth), group = as.factor(Year))) + theme_classic() 
+```
+
+
+Nest Depth Graph
+```{r}
+Cleaner <- NestDepth %>% na.omit()
+
+ggplot(data = Cleaner) + 
+  geom_boxplot(aes(x = Year, y = as.numeric(Depth), group = as.factor(Year))) + 
+  theme_classic() + 
+  labs(x = "Year",
+    y = "Nest Depth (cm)")
+
+```
+
+
+Vegetation Graph
+```{r}
+Cleaner2 <- Veg %>% na.omit()
+
+ggplot(data = Cleaner2) + 
+  geom_boxplot(aes(x = Year, y = as.numeric(Vegetation), group = as.factor(Year))) + 
+  theme_classic() + 
+  labs(x = "Year",
+    y = "Distance from Vegetation (m)")
+```
+

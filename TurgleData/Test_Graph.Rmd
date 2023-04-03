@@ -1,0 +1,39 @@
+Hi
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+Testing <- read_xlsx("Test.xlsx")
+
+Years <- Testing %>% 
+  group_by()
+
+
+`Depth of nest (cm)` <- as.numeric(Testing$`Depth of nest (cm)`)
+`Distance from high tide (m)` <- as.numeric(Testing$`Distance from high tide (m)`)
+`Distance from vegetation (m)` <- as.numeric(Testing$`Distance from vegetation (m)`)
+
+ggplot(data = Testing, aes(x=`Date (DD/MM/YY)` , y=`Depth of nest (cm)`)) + geom_boxplot()
+
+ggplot(data = Testing, aes(x=`Date (DD/MM/YY)` , y=`Distance from vegetation (m)`)) + geom_boxplot()
+
+ggplot(data = Testing, aes(x=`Date (DD/MM/YY)` , y=`Distance from high tide (m)`)) + geom_boxplot()
+
+```
+
+```{r}
+Cleaner <- GraphData2 %>% na.omit()
+
+ggplot(data = Cleaner, aes(x = Year, y = Depth, group = Year)) + geom_boxplot()
+
+ggplot(data = Cleaner) + geom_boxplot(aes(x = Year, y = as.numeric(Depth), group = as.factor(Year))) + theme_classic() 
+
+ggplot(data = Cleaner) + geom_boxplot(aes(y = as.numeric(Depth), group = as.factor(Year))) + theme_classic() 
+
+       
+```
+
