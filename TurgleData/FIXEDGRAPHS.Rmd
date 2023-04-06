@@ -1,0 +1,61 @@
+Cleaner Graphs
+
+Loading Libraries
+```{r}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(RColorBrewer)
+```
+
+Carapace
+```{r}
+Carapace <- read_excel("../TurgleData/GraphsWithoutLocation.xlsx", 
+    sheet = "CarapaceGraph")
+
+meanlength <- Carapace %>%
+  mutate(year = year(Date), month = month(Date)) %>%
+  group_by(year, month) %>%
+  summarise(mean_length = mean(Length))
+
+meanwidth <- Carapace %>%
+  mutate(year = year(Date), month = month(Date)) %>%
+  group_by(year, month) %>%
+  summarise(mean_width = mean(Width))
+
+ggplot(data = meanlength, aes(x = month, y = mean_length, group = year, color = year)) + 
+  geom_point() + 
+  geom_line() +
+  labs(x = "Month",
+    y = "Mean Carapace Length (cm)")
+
+ggplot(data = meanwidth, aes(x = month, y = mean_width, group = year, color = year)) + 
+  geom_point() + 
+  geom_line() +
+  labs(x = "Month",
+    y = "Mean Carapace Width (cm)")
+
+```
+
+
+Eggs
+```{r}
+BADEGG <- read_excel("../TurgleData/GraphsWithoutLocation.xlsx", 
+    sheet = "EggGraph")
+
+Eggs <- na.omit(BADEGG)
+
+meaneggs <- Eggs %>%
+  mutate(year = year(Date), month = month(Date)) %>%
+  group_by(year, month) %>%
+  summarise(mean_eggs = mean(NormalEggs))
+
+ggplot(data = meaneggs, aes(x = month, y = mean_eggs, group = year, color = year)) + 
+  geom_point() + 
+  geom_line() +
+  labs(x = "Month",
+    y = "Mean Eggs (cm)")
+```
+
